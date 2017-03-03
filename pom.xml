@@ -1,6 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
+    <!--
+        A distribution maven project defines the dependencyManagement for cids
+        artifacts used in a concrete deployment. It defines furthermore two types 
+        of submodules:
+        - 1-n deployment artifacts: server and/or client artifacts
+        - 1 autodistribution artifact: generates stsrters (JAR and JNLP) for all deployment artifacts
+    -->
 
     <parent>
         <groupId>de.cismet</groupId>
@@ -8,6 +16,9 @@
         <version>5.0-SNAPSHOT</version>
     </parent>
 
+    <!--
+        groupId AND version are inherited to submodules (deployment artifacts)
+    -->
     <groupId>de.cismet.cids.custom.switchon.distribution</groupId>
     <artifactId>switchon-distribution</artifactId>
     <version>5.0-SNAPSHOT</version>
@@ -16,8 +27,15 @@
     <name>cids Custom Switch-On Distribution</name>
     <description>Generates a cids distribution</description>
 
+    <!--
+        Manages (cids) dependencies of deployment of submodules (deployment artifacts)
+        NOTE: Dependency Exclusions, etc. are managed inside the individual submodule
+        to avoild interference with other submodules!  
+    -->
     <dependencyManagement>
-        <!-- IMPORT of cismet-ext-bom -->
+        <!-- 
+            IMPORTANT: IMPORT cismet-ext-bom for managed external dependencies
+        -->
         <dependencies>
             <dependency>
                 <groupId>de.cismet</groupId>
@@ -27,6 +45,11 @@
                 <scope>import</scope>
             </dependency>
             
+        <!--
+            Managed cids dependencies required by the submodules
+            -> submodules (deployment artifacts) NO NOT specifiy the version
+            but may override the scope (e.g. provided)
+        -->    
             <dependency>
                 <groupId>de.cismet.cids.custom.switchon</groupId>
                 <artifactId>cids-custom-switchon</artifactId>
@@ -48,6 +71,11 @@
                 <version>5.0-SNAPSHOT</version>
             </dependency>
             <dependency>
+                <groupId>de.cismet.cids</groupId>
+                <artifactId>cids-server-rest-legacy</artifactId>
+                <version>5.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
                 <groupId>de.cismet.cismap</groupId>
                 <artifactId>cismap-plugin</artifactId>
                 <version>5.0-SNAPSHOT</version>
@@ -60,11 +88,60 @@
         </dependencies>
     </dependencyManagement>
     
-    
+    <!--
+        Submodules for regular Reactor Build
+        These are the deployment artifacts for the autodistribution. 
+        
+        They are only required if the custom project (e.g. cids-custom-switchon) requires additional 
+        dependencies for depolyment, otherwise the custom project could be used directly in
+        the autodistribution module.
+    -->
     <modules>
-        <!--<module>switchon-navigator</module>-->
+        <!--
+            cids-custom-switchon-server, when depolyed, is started with ServerConsole 
+            from cids-utils. Therefore we have to create a submodule and add this
+            dependency.
+        -->
         <module>switchon-server</module>
-        <!--<module>switchon-server-rest</module>-->
-        <module>switchon-autodistribution</module>
+        <!--
+            cids-server-rest-legacy requires a dependency to cids-custom-switchon-server when depolyed
+            Therefore we have to create a submodule and add this dependency.
+        -->
+        <module>switchon-server-rest</module>
+        <!--
+            cids-custom-switchon does not have any dependency (runtime or compile) 
+            to cismap-plugin. Therefore we have to create a submodule and add this dependency.
+        -->
+        <module>switchon-navigator</module>
     </modules>
+    
+    <profiles>
+        <!--
+            Deactiviated during regular builds, especially on CI Server (Jenkins)!
+            Can be activated in custom action in nbactions.xml or with mvn -pl or
+            mvn -P 
+        -->
+        <profile>
+            <id>generate-autodistribution</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <!--
+            de.cismet.cidsDistDir must be specified directly in settings.xml or another profile
+            in settings.xml (e.g. the profile used for the respective custom project:
+            profile 'switchon' for custom project 'cids-custom-switchon-*')
+            -->
+            <!--<properties>
+
+                <de.cismet.cidsDistDir>/path/to/austodistribution</de.cismet.cidsDistDir>
+            </properties>-->
+            <modules>
+                <!--
+                    Creates an autodistribution inlcuding the submodules specified 
+                    in the regular reactor build with help of the cids-maven-plugin.
+                -->
+                <module>switchon-autodistribution</module>
+            </modules> 
+        </profile>
+    </profiles>  
 </project>
