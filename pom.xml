@@ -26,6 +26,17 @@
 
     <name>cids Custom Switch-On Distribution</name>
     <description>Generates a cids distribution</description>
+    
+    <!--
+        Since only POM Projects are build (no compile, no JAR), the following executions can
+        be skipped completely:
+    -->
+    <properties>
+        <jalopy.skip>true</jalopy.skip>
+        <maven.source.skip>true</maven.source.skip>
+        <jarsigner.skip>false</jarsigner.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+    </properties>
 
     <!--
         Manages (cids) dependencies of deployment of submodules (deployment artifacts)

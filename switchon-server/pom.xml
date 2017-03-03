@@ -24,16 +24,7 @@
         cids-custom-switchon-server and cids-utils!        
     -->
     <dependencyManagement>
-        <dependencies>
-            <!--
-                Require upper bound dependencies error for commons-codec:commons-codec 
-            -->
-            <dependency>
-                <groupId>commons-codec</groupId>
-                <artifactId>commons-codec</artifactId>
-                <version>1.9</version>
-            </dependency>
-            
+        <dependencies>            
             <!--
                 Require upper bound dependencies error for org.codehaus.castor:castor-xml
             -->

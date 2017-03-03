@@ -18,36 +18,160 @@
             <version>${project.version}</version>
             <type>pom</type>
         </dependency>
+        <!--<dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>switchon-server-rest</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>-->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>switchon-navigator</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
     </dependencies>
+    
+    <properties>
+        <mdep.skip>false</mdep.skip>
+        <jarsigner.skip>false</jarsigner.skip>
+        
+        <mdep.analyze.skip>true</mdep.analyze.skip>
+        <enforcer.skip>true</enforcer.skip>
+        <jalopy.skip>true</jalopy.skip>
+        <maven.test.skip>true</maven.test.skip>
+        <maven.source.skip>true</maven.source.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+    </properties>
     
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <configuration>
+                    <includeScope>runtime</includeScope>
+                    <overWriteIfNewer>true</overWriteIfNewer>
+                    <overWriteReleases>false</overWriteReleases>
+                    <overWriteSnapshots>true</overWriteSnapshots>
+                    <stripVersion>false</stripVersion>    
+                    <useRepositoryLayout>false</useRepositoryLayout> 
+                    <copyPom>false</copyPom>  
+                    <!--<excludeTypes>pom</excludeTypes>-->
+                    <includeTypes>jar</includeTypes>
+                </configuration>
+                <executions>
+                    <!-- 
+                        extends the maven-dependency-plugin executions defined in cismet-parent
+                        by the copy-installed task
+                    -->
+                    <execution>
+                        <id>copy-int-dependencies</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${de.cismet.cidsDistDir}/lib/int</outputDirectory>
+                            <includeGroupIds>de.cismet</includeGroupIds>                  
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-ext-dependencies</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${de.cismet.cidsDistDir}/lib/ext</outputDirectory>
+                            <excludeGroupIds>de.cismet</excludeGroupIds>                   
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <artifactId>exec-maven-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <executions>
+                    <execution><!-- Run our version calculation script -->
+                        <id>Version Calculation</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>notepad.exe</executable>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>verify</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skip>true</skip>
+                    <keystore>${de.cismet.keystore.path}</keystore>
+                    <alias>cismet</alias>
+                    <storepass>${de.cismet.keystore.pass}</storepass>
+                    <arguments>-strict</arguments>
+                    <tsa>${de.cismet.signing.tsa.server}</tsa>
+                    <archiveDirectory>${de.cismet.cidsDistDir}/lib/ext</archiveDirectory>
+                    <processMainArtifact>false</processMainArtifact>
+                    <!--<excludes>
+                        <exclude>**/S*.jar</exclude>
+                    </excludes>-->
+                    <includes>
+                        <include>**/*.jar</include>
+                    </includes>
+                    <verbose>false</verbose>
+                </configuration>
+            </plugin>
+            
+            
             <plugin>
                 <groupId>de.cismet.cids</groupId>
                 <artifactId>cids-maven-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>generate-lib</id>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>generate-lib</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
+                    <skip>false</skip>
                     <vendor>cismet</vendor>
                     <homepage>http://www.cismet.de</homepage>
                     <codebase>http://tl-ap001.xtr.deltares.nl/switchonDist</codebase>
                     <m2codebase>lib/m2</m2codebase>
-                    <accountExtension>switchon</accountExtension>
-                    <outputDirectory>target/cidsDistribution</outputDirectory>
+                    <accountExtension>Switchon</accountExtension>
+                    <outputDirectory>${de.cismet.cidsDistDir}</outputDirectory>
                     <failOnError>true</failOnError>
                     <verbose>true</verbose>
                     <sign>false</sign>
                     <checkSignature>false</checkSignature>
                     <dependencyConfiguration>
                         <dependencyEx>
-                             <groupId>${project.groupId}</groupId>
-                             <artifactId>switchon-server</artifactId>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>switchon-server</artifactId>
                             <generateJnlp>false</generateJnlp>
+                            <!--
+                            WARNING: Usage of additional dependencies is strongly discouraged
+                                as it totally breaks the maven dependency mechanism
+                            -->
                             <!--<additionalDependencies>
                                 <dependency>
                                     <groupId>de.cismet.commons</groupId>
@@ -76,7 +200,7 @@
                             </starterConfiguration>
                             
                         </dependencyEx>
-                        <!--<dependencyEx>
+                        <dependencyEx>
                             <groupId>de.cismet.cids.custom.switchon.distribution</groupId>
                             <artifactId>switchon-navigator</artifactId>
                             <generateJar>false</generateJar>
@@ -113,7 +237,7 @@
                                     </jarNames>
                                 </localConfiguration>
                             </starterConfiguration>
-                        </dependencyEx>-->
+                        </dependencyEx>
                     </dependencyConfiguration>
                 </configuration>
             </plugin>

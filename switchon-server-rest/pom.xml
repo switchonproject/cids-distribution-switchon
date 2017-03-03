@@ -9,8 +9,44 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     
+    <!--
+        Inherit groupId and version from parent
+    -->
     <artifactId>switchon-server-rest</artifactId>
     <packaging>pom</packaging>
     
     <name>switchon-server-rest</name>
+    <description>Depolyment artifact for cids-custom-switchon-server rest service</description>
+
+    <!--
+        Dependencies of the depolyment artifact. This is everything to create a 
+        running instance of the service or client!
+    -->
+    <dependencies>
+        <!--
+            The rest server artifiact that is depolyed and run
+        -->
+        <dependency>
+            <groupId>de.cismet.cids</groupId>
+            <artifactId>cids-server-rest-legacy</artifactId>
+        </dependency>
+        <!--
+            The actual custom server project that is needed by the legacy rest server
+            for custom action and search lookup.
+        -->
+        <dependency>
+            <groupId>de.cismet.cids.custom.switchon</groupId>
+            <artifactId>cids-custom-switchon-server</artifactId>
+        </dependency>
+        <!--
+            Add also slf4j-log4j12 binding (which is declared as OPTIONAL dependency
+            in the custom projects and the sub proejcts) to be able to forward slf4j
+            logs messages to log4j.
+        -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
 </project>
