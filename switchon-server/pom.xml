@@ -9,11 +9,20 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     
+    <!--
+        Inherit groupId and version from parent
+    -->
     <artifactId>switchon-server</artifactId>
-    <packaging>pom</packaging> <!-- pom when your project doesn't contain sources, jar otherwise -->
+    <packaging>pom</packaging>
     
     <name>switchon-server</name>
+    <description>Depolyment artifact for cids-custom-switchon-server</description>
     
+    <!--
+        This dependency managment section is only necessary to resolve dependency 
+        conflicts (detected my maven-enforcer or maven-dependency plugins) between
+        cids-custom-switchon-server and cids-utils!        
+    -->
     <dependencyManagement>
         <dependencies>
             <!--
@@ -26,7 +35,7 @@
             </dependency>
             
             <!--
-                Require upper bound dependencies error for org.codehaus.castor:castor-xm
+                Require upper bound dependencies error for org.codehaus.castor:castor-xml
             -->
             <dependency>
                 <groupId>org.codehaus.castor</groupId>
@@ -36,14 +45,29 @@
         </dependencies>
     </dependencyManagement>
     
+    <!--
+        Dependencies of the depolyment artifact. This is everything to create a 
+        running instance of the service or client!
+    -->
     <dependencies>
+        <!--
+            The actual custom project server artifiact that is depolyed and run
+        -->
         <dependency>
             <groupId>de.cismet.cids.custom.switchon</groupId>
             <artifactId>cids-custom-switchon-server</artifactId>
         </dependency>
+        <!--
+            The Server is started with HeadlessServerConsole, therfore we need this
+            dependency in the depolyment artifact!
+        -->
         <dependency>
             <groupId>de.cismet.commons</groupId>
             <artifactId>cids-utils</artifactId>
+            <!--
+                Exclude conflicting dependencies detected by maven-enforcer and 
+                maven-dependencya plugins.
+            -->
             <exclusions>
                 <exclusion>
                     <groupId>javax.xml.stream</groupId>
@@ -55,9 +79,18 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--
+            Add also slf4j-log4j12 binding (which is declared as OPTIONAL depenency
+            in the custom projects and the sub proejcts) to be able to forward slf4j
+            logs messages to log4j.
+        -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
+            <!--
+                'runtime' or 'compile' does not really matter in artifiacts of 
+                 type 'pom' (nothing to compile!) but we specifiy it anyway.
+            -->
             <scope>runtime</scope>
         </dependency>
     </dependencies>
