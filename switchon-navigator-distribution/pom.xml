@@ -8,22 +8,10 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     
-    <artifactId>switchon-autodistribution</artifactId>
+    <artifactId>switchon-navigator-distribution</artifactId>
     <packaging>pom</packaging>
     
     <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>switchon-server</artifactId>
-            <version>${project.version}</version>
-            <type>pom</type>
-        </dependency>
-        <!--<dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>switchon-server-rest</artifactId>
-            <version>${project.version}</version>
-            <type>pom</type>
-        </dependency>-->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>switchon-navigator</artifactId>
@@ -168,42 +156,6 @@
                     <checkSignature>false</checkSignature>
                     <flatClientDirectory>false</flatClientDirectory>
                     <dependencyConfiguration>
-                        <dependencyEx>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>switchon-server</artifactId>
-                            <generateJnlp>false</generateJnlp>
-                            <!--
-                            WARNING: Usage of additional dependencies is strongly discouraged
-                                as it totally breaks the maven dependency mechanism
-                            -->
-                            <!--<additionalDependencies>
-                                <dependency>
-                                    <groupId>de.cismet.commons</groupId>
-                                    <artifactId>cids-utils</artifactId>
-                                    <version>4.0</version>
-                                </dependency>
-                            </additionalDependencies>-->
-                            <starterConfiguration>
-                                <title>SWITCH-ON Demo Application</title>
-                                <properties>
-                                    <property>
-                                        <name>directory.extension</name>
-                                        <value>SWITCHON</value>
-                                    </property>
-                                    <property>
-                                        <name>user.variant</name>
-                                        <value>switchon</value>
-                                    </property>
-                                </properties>
-                                <mainClass>de.cismet.cids.admin.serverManagement.HeadlessServerConsole</mainClass>
-                                <localConfiguration>
-                                    <jarNames>
-                                        <jarName>res.jar</jarName>
-                                    </jarNames>
-                                </localConfiguration>
-                            </starterConfiguration>
-                            
-                        </dependencyEx>
                         <dependencyEx>
                             <groupId>de.cismet.cids.custom.switchon.distribution</groupId>
                             <artifactId>switchon-navigator</artifactId>

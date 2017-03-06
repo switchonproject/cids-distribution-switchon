@@ -124,6 +124,7 @@
             to cismap-plugin. Therefore we have to create a submodule and add this dependency.
         -->
         <module>switchon-navigator</module>
+        <module>switchon-navigator-distribution</module>
     </modules>
     
     <profiles>
@@ -151,7 +152,7 @@
                     Creates an autodistribution inlcuding the submodules specified 
                     in the regular reactor build with help of the cids-maven-plugin.
                 -->
-                <module>switchon-autodistribution</module>
+                <module>switchon-navigator-distribution</module>
             </modules> 
         </profile>
     </profiles>  
