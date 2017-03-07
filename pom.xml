@@ -11,8 +11,12 @@
     -->
 
     <parent>
-        <groupId>de.cismet</groupId>
-        <artifactId>cismet-parent</artifactId>
+        <groupId>de.cismet.cids</groupId>
+        <!--
+            Inherit from cids-distribution-parent which defines profiles
+            for building autodistributions
+        -->
+        <artifactId>cids-distribution-parent</artifactId>
         <version>5.0-SNAPSHOT</version>
     </parent>
 
@@ -24,20 +28,19 @@
     <version>5.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>cids Custom Switch-On Distribution</name>
+    <name>cids-custom Switch-On Distribution</name>
     <description>Generates a cids distribution</description>
     
     <!--
-        Since only POM Projects are build (no compile, no JAR), the following executions can
-        be skipped completely:
+        Inherit all properties from cids-distrubtion-parent to control build
+        plugin execution (unfortunately, build progiles do not work as expected)
+        The plugin execution configuration is optimized for building 
+        *depolyment artifact* modules -> no autodistribution steps are executed 
+        by default! Activate them explicitely in the respective autodistribution
+        modules!
     -->
-    <properties>
-        <jalopy.skip>true</jalopy.skip>
-        <maven.source.skip>true</maven.source.skip>
-        <jarsigner.skip>false</jarsigner.skip>
-        <maven.javadoc.skip>true</maven.javadoc.skip>
-    </properties>
-
+    <!--<properties></properties>-->
+    
     <!--
         Manages (cids) dependencies of deployment of submodules (deployment artifacts)
         NOTE: Dependency Exclusions, etc. are managed inside the individual submodule
@@ -57,8 +60,8 @@
             </dependency>
             
         <!--
-            Managed cids dependencies required by the submodules
-            -> submodules (deployment artifacts) NO NOT specifiy the version
+            Managed *cids* dependencies required by all depolyment artifact submodules
+            -> deployment artifacts NO NOT specifiy the version of cids dependencies
             but may override the scope (e.g. provided)
         -->    
             <dependency>
@@ -101,7 +104,7 @@
     
     <!--
         Submodules for regular Reactor Build
-        These are the deployment artifacts for the autodistribution. 
+        These are the *deployment artifacts* needed for the autodistributions. 
         
         They are only required if the custom project (e.g. cids-custom-switchon) requires additional 
         dependencies for depolyment, otherwise the custom project could be used directly in
@@ -114,45 +117,44 @@
             dependency.
         -->
         <module>switchon-server</module>
+        
         <!--
-            cids-server-rest-legacy requires a dependency to cids-custom-switchon-server when depolyed
+            cids-server-rest-legacy requires a dependency to cids-custom-switchon-server when deployed
             Therefore we have to create a submodule and add this dependency.
         -->
         <module>switchon-server-rest</module>
+        
         <!--
             cids-custom-switchon does not have any dependency (runtime or compile) 
             to cismap-plugin. Therefore we have to create a submodule and add this dependency.
         -->
         <module>switchon-navigator</module>
-        <module>switchon-navigator-distribution</module>
     </modules>
     
     <profiles>
         <!--
+            generate-autodistributions 
+            Overriden from cids-distribution-parent to define the *autodistribution*
+            modules to be build during a regular reactor build!
+
             Deactiviated during regular builds, especially on CI Server (Jenkins)!
             Can be activated in custom action in nbactions.xml or with mvn -pl or
             mvn -P 
         -->
         <profile>
-            <id>generate-autodistribution</id>
+            <id>generate-autodistributions</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <!--
-            de.cismet.cidsDistDir must be specified directly in settings.xml or another profile
-            in settings.xml (e.g. the profile used for the respective custom project:
-            profile 'switchon' for custom project 'cids-custom-switchon-*')
+                These modules create autodistributions inlcuding the submodules specified 
+                in the regular reactor build with help of the cids-maven-plugin.
             -->
-            <!--<properties>
-
-                <de.cismet.cidsDistDir>/path/to/austodistribution</de.cismet.cidsDistDir>
-            </properties>-->
             <modules>
-                <!--
-                    Creates an autodistribution inlcuding the submodules specified 
-                    in the regular reactor build with help of the cids-maven-plugin.
-                -->
+                <module>switchon-server-distribution</module>
+                <module>switchon-server-rest-distribution</module>
                 <module>switchon-navigator-distribution</module>
+                <module>switchon-navigator-preview-distribution</module>
             </modules> 
         </profile>
     </profiles>  

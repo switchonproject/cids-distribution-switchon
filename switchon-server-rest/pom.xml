@@ -19,8 +19,9 @@
     <description>Depolyment artifact for cids-custom-switchon-server rest service</description>
 
     <!--
-        Dependencies of the depolyment artifact. This is everything to create a 
-        running instance of the service or client!
+        This dependency managment section is only necessary to resolve dependency 
+        conflicts (detected by maven-enforcer or maven-dependency plugins) between
+        cids-custom-switchon-server and cids-utils!        
     -->
     <dependencies>
         <!--
@@ -46,6 +47,10 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
+            <!--
+                'runtime' or 'compile' does not really matter in artifiacts of 
+                 type 'pom' (nothing to compile!) but we specifiy it anyway.
+            -->
             <scope>runtime</scope>
         </dependency>
     </dependencies>

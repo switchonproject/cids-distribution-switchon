@@ -20,7 +20,7 @@
     
     <!--
         This dependency managment section is only necessary to resolve dependency 
-        conflicts (detected my maven-enforcer or maven-dependency plugins) between
+        conflicts (detected by maven-enforcer or maven-dependency plugins) between
         cids-custom-switchon-server and cids-utils!        
     -->
     <dependencyManagement>
@@ -37,8 +37,8 @@
     </dependencyManagement>
     
     <!--
-        Dependencies of the depolyment artifact. This is everything to create a 
-        running instance of the service or client!
+        Dependencies of the depolyment artifact. This is everything needed to 
+        create a running instance of the service or client!
     -->
     <dependencies>
         <!--

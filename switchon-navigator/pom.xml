@@ -9,32 +9,76 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     
-    <!--<parent>
-        <groupId>de.cismet</groupId>
-        <artifactId>cismet-parent</artifactId>
-        <version>5.0-SNAPSHOT</version>
-    </parent>-->
-    
+    <!--
+        Inherit groupId and version from parent
+    -->
     <artifactId>switchon-navigator</artifactId>
-    <version>5.0-SNAPSHOT</version>
     <packaging>pom</packaging> <!-- pom when your project doesn't contain sources, jar otherwise -->
     
     <name>switchon-navigator</name>
+    <description>Depolyment artifact for cids-custom-switchon</description>
+    
     
     <properties>
-        <cids.generate-lib.skip>true</cids.generate-lib.skip>
-    </properties>
+                <!--
+                    Skip all plugins not directly related to the genenration of the
+                    autodistribution!
+                -->
+                <jarsigner.skip>true</jarsigner.skip>
+                <mdep.analyze.skip>true</mdep.analyze.skip>
+                <enforcer.skip>true</enforcer.skip>
+                <jalopy.skip>true</jalopy.skip>
+                <maven.test.skip>true</maven.test.skip>
+                <maven.source.skip>true</maven.source.skip>
+                <maven.javadoc.skip>true</maven.javadoc.skip>
+                <!--
+                    Don't install the autodistribution artifact in the local repository!
+                -->
+                <maven.install.skip>true</maven.install.skip>
+                
+                <!--
+                    Enable all plugins required for the genenration of the
+                    autodistribution (just to be sure!)
+                -->
+                <mdep.skip>false</mdep.skip>
+                <cids.generate-lib.skip>false</cids.generate-lib.skip>
+            </properties>
     
+    
+    
+    <!--
+        Dependencies of the depolyment artifact. This is everything needed to 
+        create a running instance of the service or client!
+    -->   
     <dependencies>
+        <!--
+            The cids-navigator custom project. Note: Versions are defined in parent!
+        -->
         <dependency>
             <groupId>de.cismet.cids.custom.switchon</groupId>
             <artifactId>cids-custom-switchon</artifactId>
         </dependency>
+        
+        <!--
+            No runtime dependency to cismap-plugin defined in cids-custom-switchon!
+            cismap-plugin is required to run the depolyed client, so specify it here!            
+        -->
         <dependency>
             <groupId>de.cismet.cismap</groupId>
             <artifactId>cismap-plugin</artifactId>
+            <!--
+                Not neccessary, but specify it anyway)
+            -->
+            <scope>runtime</scope>
         </dependency>
+        
         <!-- BEGIN: Runtime dependencies -->
+        <!--
+            In sub projects, the dependecy slf4j-log4j12 is set to 'optional'
+            to allow the selection of different slf4j bindings. Specify it here
+            explicitely, since we want to forward all logs collected by slf4j
+            to log4j (e.g. to be able to use Beanmill)
+        -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -42,22 +86,4 @@
         </dependency>
         <!-- BEGIN: Runtime dependencies -->
     </dependencies>
-    
-    <build>
-        <!--
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>Sirius.navigator.Navigator</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>   
-        </plugins>
-        -->
-    </build>
 </project>
