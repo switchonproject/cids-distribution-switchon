@@ -172,16 +172,17 @@
                                 </java>
                                 <mainClass>Sirius.navigator.Navigator</mainClass>
                                 <!--
-                                    Arguments must be relative to codebase and must
+                                    Arguments must *absolute* (codebase) and must
                                     match the <accountExtension> (lowercase) if <flatClientDirectory>
                                     is *not* set to false!                                    
                                 -->
                                 <arguments>
-                                    <argument>client/switchon/config/log4j.debug.properties</argument>
-                                    <argument>client/switchon/config/navigator.cfg</argument>
-                                    <argument>client/switchon</argument>
-                                    <argument>client/switchon/plugins</argument>
-                                    <argument>client/switchon/search</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/switchon/config/log4j.debug.properties</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/switchon/config/navigator.cfg</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/switchon</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/switchon/plugins</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/switchon/search</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/switchon/profiles</argument>
                                 </arguments>
                                 
                                 <properties>

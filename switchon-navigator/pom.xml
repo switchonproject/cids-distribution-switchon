@@ -17,35 +17,7 @@
     
     <name>switchon-navigator</name>
     <description>Depolyment artifact for cids-custom-switchon</description>
-    
-    
-    <properties>
-                <!--
-                    Skip all plugins not directly related to the genenration of the
-                    autodistribution!
-                -->
-                <jarsigner.skip>true</jarsigner.skip>
-                <mdep.analyze.skip>true</mdep.analyze.skip>
-                <enforcer.skip>true</enforcer.skip>
-                <jalopy.skip>true</jalopy.skip>
-                <maven.test.skip>true</maven.test.skip>
-                <maven.source.skip>true</maven.source.skip>
-                <maven.javadoc.skip>true</maven.javadoc.skip>
-                <!--
-                    Don't install the autodistribution artifact in the local repository!
-                -->
-                <maven.install.skip>true</maven.install.skip>
-                
-                <!--
-                    Enable all plugins required for the genenration of the
-                    autodistribution (just to be sure!)
-                -->
-                <mdep.skip>false</mdep.skip>
-                <cids.generate-lib.skip>false</cids.generate-lib.skip>
-            </properties>
-    
-    
-    
+
     <!--
         Dependencies of the depolyment artifact. This is everything needed to 
         create a running instance of the service or client!
@@ -57,19 +29,6 @@
         <dependency>
             <groupId>de.cismet.cids.custom.switchon</groupId>
             <artifactId>cids-custom-switchon</artifactId>
-        </dependency>
-        
-        <!--
-            No runtime dependency to cismap-plugin defined in cids-custom-switchon!
-            cismap-plugin is required to run the depolyed client, so specify it here!            
-        -->
-        <dependency>
-            <groupId>de.cismet.cismap</groupId>
-            <artifactId>cismap-plugin</artifactId>
-            <!--
-                Not neccessary, but specify it anyway)
-            -->
-            <scope>runtime</scope>
         </dependency>
         
         <!-- BEGIN: Runtime dependencies -->
