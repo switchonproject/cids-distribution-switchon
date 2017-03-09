@@ -113,7 +113,7 @@
         </goals>
     </action>
     <action>
-        <actionName>CUSTOM-debug.test</actionName>
+        <actionName>CUSTOM-build-autodistributions</actionName>
         <displayName>Build all Autodistribution Modules</displayName>    
         <packagings>
             <packaging>*</packaging>
@@ -122,7 +122,7 @@
             <goal>clean install</goal>
         </goals>
         <activatedProfiles>
-            <activatedProfile>build-autodistributions</activatedProfile>
+            <activatedProfile>generate-autodistributions</activatedProfile>
         </activatedProfiles>
     </action>
 </actions>

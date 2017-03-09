@@ -154,7 +154,7 @@
                 <module>switchon-server-distribution</module>
                 <module>switchon-server-rest-distribution</module>
                 <module>switchon-navigator-distribution</module>
-                <module>switchon-navigator-preview-distribution</module>
+                <module>switchon-navigator-snapshot-distribution</module>
             </modules> 
         </profile>
     </profiles>  
