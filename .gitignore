@@ -1,6 +1,16 @@
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
 target/
-src/switchonDist/lib/localSwitchon/*.jar
 *.bak
-/src/switchonDist/lib/localSwitchon/src/plain/.backup/
-/src/switchonDist/lib/ext
-/src/switchonDist/lib/int
+*.versionsBackup
