@@ -125,4 +125,14 @@
             <activatedProfile>generate-autodistributions</activatedProfile>
         </activatedProfiles>
     </action>
+    <action>
+        <actionName>CUSTOM-update-child-modules</actionName>
+        <displayName>Update all Child Modules</displayName>
+        <goals>
+            <goal>versions:update-child-modules</goal>
+        </goals>
+        <activatedProfiles>
+            <activatedProfile>generate-autodistributions</activatedProfile>
+        </activatedProfiles>
+    </action>
 </actions>
