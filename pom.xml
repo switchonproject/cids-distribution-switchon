@@ -41,6 +41,23 @@
     -->
     <!--<properties></properties>-->
     
+    <scm>
+        <connection>scm:git:https://github.com/switchonproject/cids-distribution-switchon.git</connection>
+        <developerConnection>scm:git:git@github.com:switchonproject/cids-distribution-switchon.git</developerConnection>
+        <url>https://github.com/switchonproject/cids-distribution-switchon</url>
+        <tag>HEAD</tag>
+    </scm>
+    
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/switchonproject/cids-distribution-switchon/issues</url>
+    </issueManagement>
+    
+    <ciManagement>
+        <system>jenkins</system>
+        <url>https://ci.cismet.de/job/cids-distribution-switchon/</url>
+    </ciManagement>
+    
     <!--
         Manages (cids) dependencies of deployment of submodules (deployment artifacts)
         NOTE: Dependency Exclusions, etc. are managed inside the individual submodule
