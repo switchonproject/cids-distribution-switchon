@@ -16,7 +16,7 @@
             for building autodistributions
         -->
         <artifactId>cids-distribution-parent</artifactId>
-        <version>5.1</version>
+        <version>5.2-SNAPSHOT</version>
     </parent>
 
     <!--
@@ -29,6 +29,27 @@
 
     <name>cids-custom Switch-On Distribution</name>
     <description>Generates a cids distribution</description>
+    
+    <properties>
+        <!--
+            Default codebase (usede for starter and classpath JNLPs)
+            Can be overwritten in each module, in nbactions.xml custom builds or from command line 
+            with e.g. -DaccountExtension=Belis2
+        -->
+        <de.cismet.cidsCodebase>http://www.water-switch-on.eu/current</de.cismet.cidsCodebase>
+        
+        <!--
+            Default Account Extension (used for starter, classpath and client directories.
+            Can be overwritten in each module, in nbactions.xml custom builds or from command line 
+            with e.g. -DaccountExtension=Belis2
+        -->
+        <de.cismet.cidsAccountExtension>Switchon</de.cismet.cidsAccountExtension>
+        
+        <!--
+            Custom build timestamp formet for title and description of JNLP files
+        -->
+        <maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
+    </properties>
     
     <!--
         Inherit all properties from cids-distrubtion-parent to control build
