@@ -4,19 +4,19 @@
     <parent>
         <groupId>de.cismet.cids.custom.switchon.distribution</groupId>
         <artifactId>switchon-distribution</artifactId>
-        <version>5.0-SNAPSHOT</version>
+        <version>5.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     
     <!--
-        This is the autodistribution module for the switchon-navigator-snapshot depolyment
+        This is the autodistribution module for the switchon-navigator depolyment
         module (cids.custom-switchon + cismap-plugin). 
 
         This aertifact is *not* installed to the maven repository!
         Its sole purpose is to generate / update an autodistribution that is
-        based on switchon-navigator-snapshot depolyment module
+        based on switchon-navigator depolyment module
     -->
-    <artifactId>switchon-navigator-snapshot-distribution</artifactId>
+    <artifactId>distribution-switchon-navigator</artifactId>
     <packaging>pom</packaging>
     
     
@@ -41,14 +41,8 @@
         -->
         <mdep.skip>false</mdep.skip>
         <cids.generate-lib.skip>false</cids.generate-lib.skip>
-        <exex.skip>false</exex.skip>
+        <exec.skip>false</exec.skip>
         <jarsigner.skip>false</jarsigner.skip>
-        
-        <!--
-            Set custom accountExtension property.
-            TODO: Decide if moved to settings.xml or profile!
-        -->
-        <accountExtension>SwitchonSnapshot</accountExtension>
     </properties>
 
     <!--
@@ -59,9 +53,10 @@
     -->
     <dependencies>
         <dependency>
-            <groupId>de.cismet.cids.custom.switchon</groupId>
-            <artifactId>cids-custom-switchon</artifactId>
-            <version>5.0-SNAPSHOT</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>deployment-switchon-navigator</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
         </dependency>
     </dependencies>
     
@@ -94,7 +89,7 @@
                     starter.jar or client.jnlp creation.
                     
                     This configuration creates client the JNLP for the 
-                    switchon-navigator-snapshot depoyment artifact!
+                    switchon-navigator depoyment artifact!
                 -->
                 <configuration>
                     <vendor>cismet</vendor>
@@ -110,7 +105,7 @@
                         The global account extension that is used for naming client directories
                         and classpath / starter jars!
                     -->
-                    <accountExtension>${accountExtension}</accountExtension>
+                    <accountExtension>Switchon</accountExtension>
                     
                     <!--
                         IMPORTANT: the cidsDistribution directory. All files will be overwritten!
@@ -147,8 +142,8 @@
                     -->
                     <dependencyConfiguration>
                         <dependencyEx>
-                            <groupId>de.cismet.cids.custom.switchon</groupId>
-                            <artifactId>cids-custom-switchon</artifactId>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>deployment-switchon-navigator</artifactId>
                             
                             <!--
                                 Generate a client.JNLP but not starter jars
@@ -169,9 +164,13 @@
                             -->
                             <starterConfiguration>
                                 <!--
-                                    No Alias -> use artifactId+artifactVersion!
+                                    Optional Alias for the starter name. If *not* provided,
+                                    starter.jnlp will be named according to artifactId+actifactVersion
+                                    e.g. switchon-navigator-5.0-SNAPSHOT-starter.jnlp
+                                    
+                                    NOTE: Alias is *not* used for classpath.jnlp!
                                 -->
-                                <!--<starterAlias>switchon-navigator-snapshot</starterAlias>-->
+                                <starterAlias>switchon-navigator</starterAlias>
                                 
                                 <title>SWITCH-ON Demo Application</title>
                                 <java>
@@ -187,18 +186,18 @@
                                     is *not* set to false!                                 
                                 -->
                                 <arguments>
-                                    <argument>${de.cismet.cidsCodebase}/client/${accountExtension}/config/log4j.debug.properties</argument>
-                                    <argument>${de.cismet.cidsCodebase}/client/${accountExtension}/config/navigator.cfg</argument>
-                                    <argument>${de.cismet.cidsCodebase}/client/${accountExtension}</argument>
-                                    <argument>${de.cismet.cidsCodebase}/client/${accountExtension}/plugins</argument>
-                                    <argument>${de.cismet.cidsCodebase}/client/${accountExtension}/search</argument>
-                                    <argument>${de.cismet.cidsCodebase}/client/${accountExtension}/profiles</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/switchon/config/log4j.debug.properties</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/switchon/config/navigator.cfg</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/switchon</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/switchon/plugins</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/switchon/search</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/switchon/profiles</argument>
                                 </arguments>
                                 
                                 <properties>
                                     <property>
                                         <name>directory.extension</name>
-                                        <value>${accountExtension}</value>
+                                        <value>Switchon</value>
                                     </property>
                                     <property>
                                         <name>user.variant</name>
@@ -216,6 +215,7 @@
                                 <localConfiguration>
                                     <jarNames>
                                         <jarName>res.jar</jarName>
+                                        <jarName>navigatorImages.jar</jarName>
                                     </jarNames>
                                 </localConfiguration>
                             </starterConfiguration>
@@ -287,4 +287,5 @@
             </build>
         </profile>
     </profiles>
+    <name>distribution-switchon-navigator</name>
 </project>
