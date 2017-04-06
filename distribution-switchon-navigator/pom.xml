@@ -4,7 +4,7 @@
     <parent>
         <groupId>de.cismet.cids.custom.switchon.distribution</groupId>
         <artifactId>switchon-distribution</artifactId>
-        <version>5.0-SNAPSHOT</version>
+        <version>5.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     
@@ -16,34 +16,11 @@
         Its sole purpose is to generate / update an autodistribution that is
         based on switchon-navigator depolyment module
     -->
-    <artifactId>switchon-navigator-distribution</artifactId>
+    <artifactId>distribution-switchon-navigator</artifactId>
     <packaging>pom</packaging>
     
-    
-    <!-- Controlling plugin execution based on build profiles does not work as expected
-         Therefore we have to rely on properties for activating / deactivating certain
-         plugins during the build!
-    -->
-    <properties>
-        <!--
-            Deactivate all plugins not directly required for building the autodistribution
-        -->
-        <jalopy.skip>true</jalopy.skip>
-        <maven.source.skip>true</maven.source.skip>
-        <maven.javadoc.skip>true</maven.javadoc.skip>
-        <mdep.analyze.skip>true</mdep.analyze.skip>
-        <enforcer.skip>true</enforcer.skip>
-        <maven.test.skip>true</maven.test.skip>
-        <maven.install.skip>true</maven.install.skip>
-        
-        <!--
-             Activate all plugins directly required for building the autodistribution
-        -->
-        <mdep.skip>false</mdep.skip>
-        <cids.generate-lib.skip>false</cids.generate-lib.skip>
-        <exex.skip>false</exex.skip>
-        <jarsigner.skip>false</jarsigner.skip>
-    </properties>
+    <name>distribution-switchon-navigator</name>
+    <description>switchon-navigator autodistribution module</description>
 
     <!--
         IMPORTANT: For the cids-maven plugin to work properly there 
@@ -54,7 +31,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>switchon-navigator</artifactId>
+            <artifactId>deployment-switchon-navigator</artifactId>
             <version>${project.version}</version>
             <type>pom</type>
         </dependency>
@@ -105,7 +82,7 @@
                         The global account extension that is used for naming client directories
                         and classpath / starter jars!
                     -->
-                    <accountExtension>Switchon</accountExtension>
+                    <accountExtension>${de.cismet.cidsAccountExtension}</accountExtension>
                     
                     <!--
                         IMPORTANT: the cidsDistribution directory. All files will be overwritten!
@@ -143,7 +120,7 @@
                     <dependencyConfiguration>
                         <dependencyEx>
                             <groupId>${project.groupId}</groupId>
-                            <artifactId>switchon-navigator</artifactId>
+                            <artifactId>deployment-switchon-navigator</artifactId>
                             
                             <!--
                                 Generate a client.JNLP but not starter jars
@@ -172,7 +149,7 @@
                                 -->
                                 <starterAlias>switchon-navigator</starterAlias>
                                 
-                                <title>SWITCH-ON Demo Application</title>
+                                <title>SWITCH-ON SIP Expert GUI v${project.version} (${maven.build.timestamp})</title>
                                 <java>
                                     <version>1.7+</version>
                                     <initialHeapSize>512M</initialHeapSize>
@@ -182,16 +159,16 @@
                                 <mainClass>Sirius.navigator.Navigator</mainClass>
                                 <!--
                                     Arguments must *absolute* (codebase) and must
-                                    match the <accountExtension> (lowercase) if <flatClientDirectory>
+                                    match the <accountExtension> (case sensitive!) if <flatClientDirectory>
                                     is *not* set to false!                                 
                                 -->
                                 <arguments>
-                                    <argument>${de.cismet.cidsCodebase}/client/switchon/config/log4j.debug.properties</argument>
-                                    <argument>${de.cismet.cidsCodebase}/client/switchon/config/navigator.cfg</argument>
-                                    <argument>${de.cismet.cidsCodebase}/client/switchon</argument>
-                                    <argument>${de.cismet.cidsCodebase}/client/switchon/plugins</argument>
-                                    <argument>${de.cismet.cidsCodebase}/client/switchon/search</argument>
-                                    <argument>${de.cismet.cidsCodebase}/client/switchon/profiles</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/${de.cismet.cidsAccountExtension}/config/log4j.debug.properties</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/${de.cismet.cidsAccountExtension}/config/navigator.cfg</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/${de.cismet.cidsAccountExtension}</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/${de.cismet.cidsAccountExtension}/plugins</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/${de.cismet.cidsAccountExtension}/search</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/${de.cismet.cidsAccountExtension}/profiles</argument>
                                 </arguments>
                                 
                                 <properties>
@@ -216,6 +193,7 @@
                                     <jarNames>
                                         <jarName>res.jar</jarName>
                                         <jarName>navigatorImages.jar</jarName>
+                                        <jarName>templates.jar</jarName>
                                     </jarNames>
                                 </localConfiguration>
                             </starterConfiguration>
@@ -257,34 +235,4 @@
             </plugin>-->
         </plugins>
     </build>
-    
-    <!--
-        sign_all.sh does not work properly under windows
-        FIXME: sign_all.sh can be run with git bash. 
-        Configure maven.exec to run sign_all.sh under windows
-        -> CreateProcess error=2, The system cannot find the file specified
-    -->
-    <profiles>
-        <profile>
-            <id>sign-ext-dependencies</id>
-            <activation>
-                <os>
-                    <family>unix</family>
-                </os>
-            </activation>
-            <build>
-                <plugins>
-                    <!--
-                        Activate this plugin from cids-distribution-parent to sign all
-                        jars in lib/ext with cismet key. (uses external sign_all.sh which
-                        may not work on all systems!
-                    -->
-                    <plugin>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <groupId>org.codehaus.mojo</groupId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>

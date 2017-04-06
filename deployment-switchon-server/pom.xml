@@ -12,10 +12,10 @@
     <!--
         Inherit groupId and version from parent
     -->
-    <artifactId>switchon-server</artifactId>
+    <artifactId>deployment-switchon-server</artifactId>
     <packaging>pom</packaging>
     
-    <name>switchon-server</name>
+    <name>deployment-switchon-server</name>
     <description>Depolyment artifact for cids-custom-switchon-server</description>
     
     <!--

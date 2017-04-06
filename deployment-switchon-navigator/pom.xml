@@ -12,10 +12,10 @@
     <!--
         Inherit groupId and version from parent
     -->
-    <artifactId>switchon-navigator</artifactId>
+    <artifactId>deployment-switchon-navigator</artifactId>
     <packaging>pom</packaging> <!-- pom when your project doesn't contain sources, jar otherwise -->
     
-    <name>switchon-navigator</name>
+    <name>deployment-switchon-navigator</name>
     <description>Depolyment artifact for cids-custom-switchon</description>
 
     <!--

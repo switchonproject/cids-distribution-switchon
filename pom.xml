@@ -16,7 +16,7 @@
             for building autodistributions
         -->
         <artifactId>cids-distribution-parent</artifactId>
-        <version>5.0</version>
+        <version>5.2-SNAPSHOT</version>
     </parent>
 
     <!--
@@ -29,6 +29,27 @@
 
     <name>cids-custom Switch-On Distribution</name>
     <description>Generates a cids distribution</description>
+    
+    <properties>
+        <!--
+            Default codebase (usede for starter and classpath JNLPs)
+            Can be overwritten in each module, in nbactions.xml custom builds or from command line 
+            with e.g. -DaccountExtension=Belis2
+        -->
+        <de.cismet.cidsCodebase>http://www.water-switch-on.eu/current</de.cismet.cidsCodebase>
+        
+        <!--
+            Default Account Extension (used for starter, classpath and client directories.
+            Can be overwritten in each module, in nbactions.xml custom builds or from command line 
+            with e.g. -DaccountExtension=Belis2
+        -->
+        <de.cismet.cidsAccountExtension>Switchon</de.cismet.cidsAccountExtension>
+        
+        <!--
+            Custom build timestamp formet for title and description of JNLP files
+        -->
+        <maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
+    </properties>
     
     <!--
         Inherit all properties from cids-distrubtion-parent to control build
@@ -70,7 +91,7 @@
             <dependency>
                 <groupId>de.cismet</groupId>
                 <artifactId>cismet-ext-bom</artifactId>
-                <version>5.0</version>
+                <version>5.0.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -83,17 +104,17 @@
             <dependency>
                 <groupId>de.cismet.cids.custom.switchon</groupId>
                 <artifactId>cids-custom-switchon</artifactId>
-                <version>5.0</version>
+                <version>5.0.1</version>
             </dependency>
             <dependency>
                 <groupId>de.cismet.cids.custom.switchon</groupId>
                 <artifactId>cids-custom-switchon-server</artifactId>
-                <version>5.0</version>
+                <version>5.0.1</version>
             </dependency>
             <dependency>
                 <groupId>de.cismet.cids.navigator</groupId>
                 <artifactId>cids-navigator</artifactId>
-                <version>5.0</version>
+                <version>5.0.1</version>
             </dependency>
             <dependency>
                 <groupId>de.cismet.cids.server</groupId>
@@ -132,46 +153,23 @@
             from cids-utils. Therefore we have to create a submodule and add this
             dependency.
         -->
-        <module>switchon-server</module>
         
         <!--
             cids-server-rest-legacy requires a dependency to cids-custom-switchon-server when deployed
             Therefore we have to create a submodule and add this dependency.
         -->
-        <module>switchon-server-rest</module>
         
         <!--
             cids-custom-switchon does not have any dependency (runtime or compile) 
             to cismap-plugin. Therefore we have to create a submodule and add this dependency.
         -->
-        <module>switchon-navigator</module>
+        <module>deployment-switchon-navigator</module>
+        <module>deployment-switchon-server</module>
+        <module>deployment-switchon-server-rest</module>
+        
+        <module>distribution-switchon-server</module>
+        <module>distribution-switchon-server-rest</module>
+        <module>distribution-switchon-navigator</module>
+        <module>distribution-switchon-navigator-snapshot</module>
     </modules>
-    
-    <profiles>
-        <!--
-            generate-autodistributions 
-            Overriden from cids-distribution-parent to define the *autodistribution*
-            modules to be build during a regular reactor build!
-
-            Deactiviated during regular builds, especially on CI Server (Jenkins)!
-            Can be activated in custom action in nbactions.xml or with mvn -pl or
-            mvn -P 
-        -->
-        <profile>
-            <id>generate-autodistributions</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <!--
-                These modules create autodistributions inlcuding the submodules specified 
-                in the regular reactor build with help of the cids-maven-plugin.
-            -->
-            <modules>
-                <module>switchon-server-distribution</module>
-                <module>switchon-server-rest-distribution</module>
-                <module>switchon-navigator-distribution</module>
-                <module>switchon-navigator-snapshot-distribution</module>
-            </modules> 
-        </profile>
-    </profiles>  
 </project>
