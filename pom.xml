@@ -170,6 +170,5 @@
         <module>distribution-switchon-server</module>
         <module>distribution-switchon-server-rest</module>
         <module>distribution-switchon-navigator</module>
-        <module>distribution-switchon-navigator-snapshot</module>
     </modules>
 </project>
