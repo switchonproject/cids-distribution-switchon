@@ -24,7 +24,7 @@
     -->
     <groupId>de.cismet.cids.custom.switchon.distribution</groupId>
     <artifactId>switchon-distribution</artifactId>
-    <version>5.1-SNAPSHOT</version>
+    <version>5.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>cids-custom Switch-On Distribution</name>
@@ -170,6 +170,5 @@
         <module>distribution-switchon-server</module>
         <module>distribution-switchon-server-rest</module>
         <module>distribution-switchon-navigator</module>
-        <module>distribution-switchon-navigator-snapshot</module>
     </modules>
 </project>
