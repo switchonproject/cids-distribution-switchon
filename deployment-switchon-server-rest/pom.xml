@@ -5,17 +5,17 @@
     <parent>
         <groupId>de.cismet.cids.custom.switchon.distribution</groupId>
         <artifactId>switchon-distribution</artifactId>
-        <version>5.0</version>
+        <version>5.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     
     <!--
         Inherit groupId and version from parent
     -->
-    <artifactId>switchon-server-rest</artifactId>
+    <artifactId>deployment-switchon-server-rest</artifactId>
     <packaging>pom</packaging>
     
-    <name>switchon-server-rest</name>
+    <name>deployment-switchon-server-rest</name>
     <description>Depolyment artifact for cids-custom-switchon-server rest service</description>
 
     <!--

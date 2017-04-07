@@ -5,17 +5,17 @@
     <parent>
         <groupId>de.cismet.cids.custom.switchon.distribution</groupId>
         <artifactId>switchon-distribution</artifactId>
-        <version>5.0</version>
+        <version>5.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     
     <!--
         Inherit groupId and version from parent
     -->
-    <artifactId>switchon-navigator</artifactId>
+    <artifactId>deployment-switchon-navigator</artifactId>
     <packaging>pom</packaging> <!-- pom when your project doesn't contain sources, jar otherwise -->
     
-    <name>switchon-navigator</name>
+    <name>deployment-switchon-navigator</name>
     <description>Depolyment artifact for cids-custom-switchon</description>
 
     <!--
