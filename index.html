@@ -1,21 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="chrome=1">
-        <meta name="date" content="2016-03-15T00:00:00+02:00"/> 
-        <title>SIP Expert Catalogue Management APIs</title>
-
-        <link rel="stylesheet" href="stylesheets/styles.css">
-        <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-        <script src="javascripts/scale.fix.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-        <meta name="author" content="Pascal Dihé">
-        <meta name="description" content="This is the project page of the Expert Catalogue Management API of the Spatial Information Platform of the SWITCH-ON EU FP7 collaborative project.">
-        <!--[if lt IE 9]>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="date" content="2016-03-15T00:00:00+02:00">
+    <title>SIP Expert Catalogue Management APIs</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+      user-scalable=no">
+    <meta name="author" content="Pascal Dihé">
+    <meta name="description" content="This is the project page of the
+      Expert Catalogue Management API of the Spatial Information
+      Platform of the SWITCH-ON EU FP7 collaborative project.">
+    <!--[if lt IE 9]>
         <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <script>
+    <script>
             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
                 i[r] = i[r] || function () {
@@ -31,115 +34,143 @@
             ga('create', 'UA-56181881-1', 'auto');
             ga('send', 'pageview');
         </script>
-    </head>
-    <body>
-        <div class="wrapper">
-            <header>
-                <h1>SIP Expert Catalogue Management APIs</h1>
-                <p>cids-custom-switchon-server website on github.io</p>
-                <p class="view"><a href="https://github.com/switchonproject/cids-custom-switchon-server">View the Project on GitHub <small>switchonproject/cids-custom-switchon-server</small></a></p>
-                <ul>
-                    <li><a href="https://switchonproject.github.io/" title="switchonproject website on github.io"><strong>Return</strong> Home</a></li>
-                    <li><a href="#accessing" title="Access the REST API"><strong>Access</strong> REST API</a></li>
-                    <li><a href="#documentation" title="Read the developer documentation"><strong>Read</strong> Documentation</a></li>
-                    <li><a href="#downloads" title="Download sourcecode and binaries"><strong>Download</strong> Software</a></li>
-                    <li><a href="#demo" title="View API Demo"><strong>View</strong> Demo</a></li>
-                </ul>
-            </header>
-            <section>
-                <h3>
-                    <a name="about" class="anchor" href="#about"><span class="octicon octicon-link"></span></a>
-                    About the Meta-Data REST API
-                </h3>
-                <p>
-                    This is the <strong>SIP Expert Catalogue Management API</strong> (Meta-Data REST API) of the Spatial Information Platform (SIP) 
-                    of the <a href="http://www.water-switch-on.eu/" title="SWITCH-ON" target="_blank">SWITCH-ON</a> 
-                    EU FP7 collaborative project.
-                </p>
-                <p>
-                    <img src="https://switchonproject.github.io/cids-custom-switchon-server/images/meta-data-rest-api.png" alt="Meta-Data REST API"/>
-                </p>
-                <p>
-                    Besides the functionalities for providing access to a meta-data catalogue, 
-                    the SIP Expert Catalogue Management APIs provide advanced functionalities 
-                    to <a href="https://switchonproject.github.io/cids-custom-switchon/" title="SIP Expert Catalogue and Data Management GUI">SIP Expert GUIs</a> 
-                    for manipulating the meta-data catalogue, including import of meta-data and the 
-                    (semi-automatic) creation of meta-data from open-data, and 
-                    advanced functionalities not supported by the catalogue standards. 
-                    Meta-data are served in accordance with the Standard Information Model of the SIP.
-                    The Meta-Data REST API is implemented by SWITCH-ON partner 
-                    <a href="http://www.cismet.de" title="cismet GmbH" target="_blank">cismet</a> on 
-                    basis of the <a href="https://github.com/cismet/cids-server" title="Server components of the cids system" target="_blank">cids server</a> 
-                    components of the <a href="http://www.cismet.de/cidsReadme.html" title="cids README">cids system</a>  a set of web services.
-                </p>
-                
-                <h3>
-                    <a name="accessing" class="anchor" href="#accessing"><span class="octicon octicon-link"></span></a>
-                    Accessing the Meta-Data REST API
-                </h3>
-                <p>
-                    The Meta-Data REST API can be found at <br/> 
-                    <strong><a href="http://tl-243.xtr.deltares.nl/switchon_server_rest/swagger/" target="_blank">http://tl-243.xtr.deltares.nl/switchon_server_rest/swagger/</a></strong>. 
-                </p>
-                                
-                <h3>
-                    <a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Technical Documentation
-                </h3>
-                <p>
-                    Currently, the following technical documentation regarding the SIP Expert API is available:
-                    <ul>
-                        <li>
-                            <strong><a href="assets/Meta-Data-API-Specification.pdf" title="Meta-Data API Specification" target="_blank">Meta-Data API Specification</a></strong><br>
-                            This document provides a specification of the available Meta-Data APIs.
-                        </li> 
-                        <li>
-                            <strong><a href="assets/D2_6_FINAL_270614.pdf" title="Standard Information Model for Meta-Data" target="_blank">Standard Information Model for Meta-Data</a></strong><br>
-                            This document provides a detailed and explanatory description 
-                            of the Standard Information Model for Meta-Data (SIM) which 
-                            constitutes an intrinsic part of the Spatial Information Platform (SIP).
-                        </li>                       
-                        <li>
-                            <strong><a href="https://github.com/switchonproject/cids-custom-switchon/wiki/Developer-Documentation" title="Developer Documentation" target="_blank">Developer Documentation</a></strong><br>
-                            The Developer Documentation wiki of the SIP Expert Catalogue and Data Management GUI (cids-custom-switchon) 
-                            contains useful information for developers of the SIP as well as for individuals involved in the 
-                            installation and maintenance of the SIP instances on cismet and deltares servers. 
-                        </li>                                         
-                    </ul>
-                <p>
-                    
-                <h3>
-                    <a name="downloads" class="anchor" href="#downloads"><span class="octicon octicon-link"></span></a>Downloads
-                </h3>
-                <p>
-                    <a href="https://repo.cismet.de/simple/cismet-libs-snapshots-local/de/cismet/cids/custom/switchon/cids-custom-switchon-server/" title="cids-custom-switchon-server snapshot builds" target="_blank">Binaries</a> (development builds)
-                    and <a href="https://github.com/switchonproject/cids-custom-switchon-server/zipball/dev" title="zipped dev brach" target="_blank">source code</a> are available on the 
-                    <a href="https://repo.cismet.de/webapp/home.html" title="repo.cismet.de" target="_blank">Artifactory</a> and <a href="https://github.com/switchonproject/cids-custom-switchon-server/" title="switchonproject/cids-custom-switchon-server" target="_blank">GitHub</a> repositories.
-                </p>
-                
-                <h3>
-                    <a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo
-                </h3>
-                <p>
-                    The following video showcases the features of Meta-Data REST API 
-                </p>
-                <p>
-                   <iframe width="640" height="480" src="//www.youtube-nocookie.com/embed/1vWpg0tEeeg?rel=0" frameborder="0" allowfullscreen></iframe>
-                </p>
-                
-                <h3>
-                    <a name="problems" class="anchor" href="#problems"><span class="octicon octicon-link"></span></a>Reporting Problems
-                </h3>
-                <p>
-                    Please report any problems or bugs related to the SIP Expert Catalogue Management Java API 
-                    by using the <a href="https://github.com/switchonproject/cids-custom-switchon-server/issues">GitHub Issue Tracker</a>.
-                </p>
-            </section>
-        </div>
-        <footer>
-            <p>Project maintained by <a href="https://github.com/switchonproject">switchonproject</a></p>
-            <!--<p>Software developed by <a href="http://www.cismet.de">cismet GmbH</a></p>-->
-            <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-        </footer>
-        <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    </body>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>SWITCH-ON Spatial Information Platform Software Distribution</h1>
+        <p><a
+            href="https://github.com/switchonproject/cids-distribution-switchon"
+            target="_blank">cids-distribution-switchon</a> on github.io</p>
+        <p class="view"><a
+            href="https://github.com/switchonproject/cids-custom-switchon-server">View
+
+
+            the Project on GitHub <small>switchonproject/cids-custom-switchon-server</small></a></p>
+        <ul>
+          <li><a href="https://switchonproject.github.io/"
+              title="switchonproject website on github.io"><strong>Return</strong>
+              Home</a></li>
+          <li><a
+              href="https://github.com/switchonproject/switchon-docker-images"
+              title="SWITCH-ON Docker Images"><strong>Docker</strong>
+              Images</a></li>
+          <li><a
+              href="https://github.com/switchonproject/switchon-docker-volumes"
+              target="_blank" title="SWITCH-ON Docker Volumes"><strong>Docker</strong>
+              Volumes</a></li>
+          <li><a href="https://hub.docker.com/u/switchon/"
+              target="_blank" title="Docker Hub"><strong>Docker</strong>
+              Hub</a></li>
+        </ul>
+      </header>
+      <section>
+        <h3>About the&nbsp; SWITCH-ON SIP Software Distribution </h3>
+        The SWITCH-ON Spatial Information Platform Software Distribution
+        is an auto-updateable and easy installable software package of
+        SWITCH-ON Backend Services and Client Components. Together with
+        the respective <a
+          href="https://github.com/switchonproject/switchon-docker-images">Docker
+          Images</a> and <a
+          href="https://github.com/switchonproject/switchon-docker-volumes">Volumes</a>
+        it represents a powerful tool for operations and maintenance of
+        the SWITCH-ON Spatial Information Platform. <br>
+        <br>
+        <h3> Key benefits</h3>
+        <p>The key benefits of the <a href="https://www.docker.com/"
+            target="_blank">docker</a>-based SWITCH-ON SIP Software
+          Distribution are<br>
+        </p>
+        <ul>
+          <li><strong><b>Portability</b></strong><br>
+            The SIP's server and client components as well as all
+            required dependencies (e.g. the Java Runtime Environment)
+            are bundled into a single docker image that is independent
+            from a particular server (e.g. hardware configuration,
+            operation system and software environment). The image can be
+            transferred to any server that&nbsp; runs docker in a recent
+            version and can be instantiated as docker container while
+            the actual host-specific configuration (logging, database
+            URLs, local paths) is injected from a local volume. <br>
+          </li>
+          <li><strong>Version control </strong><br>
+            Not only the source code of the various SIP building blocks
+            hosted on <a href="https://github.com/switchonproject">github</a>
+            is version controlled but also the SIP Software
+            Distribution&nbsp; images hosted on <a
+              href="https://hub.docker.com/u/switchon/">dockerhub</a>.&nbsp;
+            So it's easily possible to roll-back to a previous version
+            of the SIP with a different <a
+              href="https://hub.docker.com/r/switchon/cids-distribution-switchon/">SWITCH-ON
+              Docker Image</a> and/or to use a previous configuration
+            from a version controlled <a
+href="https://github.com/switchonproject/switchon-docker-volumes/tree/dev/cids-distribution-switchon">SWITCH-ON
+              Docker Volume</a>.</li>
+          <li><strong>Rapid deployment</strong><br>
+            Thanks to the the docker-based approach, the SIP can be
+            deployed on new servers without the need to perform
+            complicated setup and installation tasks. <br>
+          </li>
+          <li><strong>Instant updates</strong><br>
+            The <a
+href="https://github.com/switchonproject/cids-distribution-switchon/blob/master/README.md">SIP
+              Software Distribution</a> can be updated automatically
+            when a new release is available , so bugfixes and new
+            features can be made available to end users almost
+            instantly.</li>
+          <li><strong>Low entry hurdle</strong><br>
+            The entry hurdle for&nbsp; operating the SWITCH-ON SIP
+            Software Distribution&nbsp; is significantly lower than
+            setting up the SIP from its distinct building blocks.
+            Systems administrators can install and maintain the SIP
+            without knowledge of its internals, components or
+            interdependencies.</li>
+          <li>Isolation<br>
+            The docker-based approach ensures that the SIP is isolated
+            and segregated from other application running on the same
+            machine. Even different version of the&nbsp; SIP Meta-Data
+            Repository <br>
+            <br>
+          </li>
+        </ul>
+        <h3> Building blocks and architecture</h3>
+        <p>The&nbsp; SWITCH-ON SIP Software Distribution consist of the
+          following building blocks:<br>
+        </p>
+        <h4>cids-distribution-switchon</h4>
+        <p>This is the core of the SIP Software Distribution. It bundles
+          the different <a
+            href="https://github.com/cismet/cids-navigator">cids</a>-based
+          components of the SIP (among others the <a
+            href="https://switchonproject.github.io/cids-custom-switchon-server/">SIP
+            Expert Catalogue Management APIs</a> and the <a
+            href="https://switchonproject.github.io/cids-custom-switchon/">SIP
+            Expert Catalogue and Data Management GUI</a>) into a
+          auto-updateable software package. <br>
+        </p>
+        <p> </p>
+        <p> <iframe
+            src="//www.youtube-nocookie.com/embed/1vWpg0tEeeg?rel=0"
+            allowfullscreen="" width="640" height="480" frameborder="0"></iframe>
+        </p>
+        <h3> <a name="problems" class="anchor" href="#problems"><span
+              class="octicon octicon-link"></span></a>Reporting Problems
+        </h3>
+        <p> Please report any problems or bugs related to the SIP Expert
+          Catalogue Management Java API by using the <a
+href="https://github.com/switchonproject/cids-custom-switchon-server/issues">GitHub
+
+
+            Issue Tracker</a>. </p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a
+          href="https://github.com/switchonproject">switchonproject</a></p>
+      <!--<p>Software developed by <a href="http://www.cismet.de">cismet GmbH</a></p>-->
+      <p>Hosted on GitHub Pages — Theme by <a
+          href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
 </html>
