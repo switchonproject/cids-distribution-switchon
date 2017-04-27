@@ -19,7 +19,7 @@ pipeline {
                 withMaven(
                     maven: 'default', // Tools declared in the Jenkins "Global Tool Configuration"
                     jdk: 'default'){
-                    sh 'mvn -U clean deploy'
+                    sh 'mvn -U clean install'
                 } // withMaven will discover the generated Maven artifacts, JUnit reports and FindBugs reports
             }
         }
