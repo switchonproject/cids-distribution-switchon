@@ -31,7 +31,7 @@
     <description>Generates a cids distribution</description>
     
     <!--
-        Note: Properties are defined in settings.xml (global-properties or custom profile):
+        Note: Properties are overriden in settings.xml (global-properties or custom profile):
         If the distribution is used as *git submodule* of a docker-image,
         properties can be set from ENV varibales, e.g.
         <de.cismet.cidsCodebase>${env.CIDS_CODEBASE}</de.cismet.cidsCodebase>
@@ -42,19 +42,19 @@
             Can be overwritten in each module, in nbactions.xml custom builds or from command line 
             with e.g. -DaccountExtension=Belis2
         -->
-        <!--<de.cismet.cidsCodebase>http://www.water-switch-on.eu/current</de.cismet.cidsCodebase>-->
+        <de.cismet.cidsCodebase>http://www.water-switch-on.eu/current</de.cismet.cidsCodebase>
         
         <!--
             Default Account Extension (used for starter, classpath and client directories.
             Can be overwritten in each module, in nbactions.xml custom builds or from command line 
             with e.g. -DaccountExtension=Belis2
         -->
-        <!--<de.cismet.cidsAccountExtension>Switchon</de.cismet.cidsAccountExtension>-->
+        <de.cismet.cidsAccountExtension>Switchon</de.cismet.cidsAccountExtension>
         
         <!--
             Custom build timestamp format for title and description of JNLP files
         -->
-        <!--<maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>-->
+        <maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
     </properties>
     
     <!--
