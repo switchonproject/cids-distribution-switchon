@@ -16,7 +16,7 @@
             for building autodistributions
         -->
         <artifactId>cids-distribution-parent</artifactId>
-        <version>5.2.3</version>
+        <version>5.3</version>
     </parent>
 
     <!--
@@ -30,25 +30,31 @@
     <name>cids-custom Switch-On Distribution</name>
     <description>Generates a cids distribution</description>
     
+    <!--
+        Note: Properties are defined in settings.xml (global-properties or custom profile):
+        If the distribution is used as *git submodule* of a docker-image,
+        properties can be set from ENV varibales, e.g.
+        <de.cismet.cidsCodebase>${env.CIDS_CODEBASE}</de.cismet.cidsCodebase>
+    -->
     <properties>
         <!--
             Default codebase (usede for starter and classpath JNLPs)
             Can be overwritten in each module, in nbactions.xml custom builds or from command line 
             with e.g. -DaccountExtension=Belis2
         -->
-        <de.cismet.cidsCodebase>http://www.water-switch-on.eu/current</de.cismet.cidsCodebase>
+        <!--<de.cismet.cidsCodebase>http://www.water-switch-on.eu/current</de.cismet.cidsCodebase>-->
         
         <!--
             Default Account Extension (used for starter, classpath and client directories.
             Can be overwritten in each module, in nbactions.xml custom builds or from command line 
             with e.g. -DaccountExtension=Belis2
         -->
-        <de.cismet.cidsAccountExtension>Switchon</de.cismet.cidsAccountExtension>
+        <!--<de.cismet.cidsAccountExtension>Switchon</de.cismet.cidsAccountExtension>-->
         
         <!--
-            Custom build timestamp formet for title and description of JNLP files
+            Custom build timestamp format for title and description of JNLP files
         -->
-        <maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
+        <!--<maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>-->
     </properties>
     
     <!--
@@ -91,7 +97,7 @@
             <dependency>
                 <groupId>de.cismet</groupId>
                 <artifactId>cismet-ext-bom</artifactId>
-                <version>5.0.1</version>
+                <version>5.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -104,17 +110,17 @@
             <dependency>
                 <groupId>de.cismet.cids.custom.switchon</groupId>
                 <artifactId>cids-custom-switchon</artifactId>
-                <version>5.0.1</version>
+                <version>5.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>de.cismet.cids.custom.switchon</groupId>
                 <artifactId>cids-custom-switchon-server</artifactId>
-                <version>5.0.1</version>
+                <version>5.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>de.cismet.cids.navigator</groupId>
                 <artifactId>cids-navigator</artifactId>
-                <version>5.0.1</version>
+                <version>5.0.2</version>
             </dependency>
             <dependency>
                 <groupId>de.cismet.cids.server</groupId>
@@ -129,7 +135,7 @@
             <dependency>
                 <groupId>de.cismet.cismap</groupId>
                 <artifactId>cismap-plugin</artifactId>
-                <version>5.0</version>
+                <version>5.0.1</version>
             </dependency>
             <dependency>
                 <groupId>de.cismet.commons</groupId>
